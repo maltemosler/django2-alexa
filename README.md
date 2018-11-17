@@ -19,5 +19,6 @@ You can use this library with `DEBUG` mode on. The amazon server verification fo
 ## 3. Settings
 This django app adds some settings to your project:
 
-   `ALEXA_VERIFY_CONN : bool` Default: `True`
-This setting specifies if every request to an alexa skill should be verified against the amazon servers. This is useful when testing your skill without Amazon's service.
+|Name|Type|Default|Description|
+|--|--|--|--|
+|`ALEXA_VERIFY_CONN`|`bool`|`True`|This setting specifies if every request to an alexa skill should be verified against the amazon servers. This is useful when testing your skill without Amazon's service.|
