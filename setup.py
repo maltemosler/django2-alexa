@@ -1,11 +1,17 @@
+import os
+
 import setuptools
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+# allow setup.py to be run from any path
+os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
+
+
 setuptools.setup(
     name="django2-alexa",
-    version="0.0.3",
+    version="0.0.4",
     author="Tim Woocker & Malte Mosler",
     author_email="tim.woocker@googlemail.com",
     description="Django app for easily creating Amazon Alexa Skills",
