@@ -1,1 +1,1 @@
-# django-alexa
+# Django2 app for creating Alexa Skills
