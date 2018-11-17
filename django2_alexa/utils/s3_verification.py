@@ -20,7 +20,7 @@ from . import VerificationError
 def is_valid_request(request: HttpRequest) -> bool:
     url = request.META.get("SignatureCertChainUrl")
     signature = request.META.get("Signature")
-    body = json.loads(request.body)
+    body = json.loads(request.body.decode())
     if not _valid_certificate_url(url):
         return False
     cert_data = urlopen(url).read()
@@ -45,7 +45,7 @@ def verify_signature(cert, signature, signed_data):
     try:
         signature = base64.b64decode(signature)
         crypto.verify(cert, signature, signed_data, 'sha1')
-    except crypto.Error as e:
+    except crypto.Error:
         return False
     return True
 

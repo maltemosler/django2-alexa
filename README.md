@@ -1,9 +1,12 @@
+
 # Django2 app for creating Alexa Skills
-Django app for easily creating Amazon Alexa Skills
+Django app for easily creating Amazon Alexa Skills.
+*By Tim Woocker & Malte Mosler*
 
 ## Table of Content
 1. [Prerequisites](#1-prerequisites)
 2. [Getting Started](#2-getting-started)
+3. [Settings](#3-settings)
 
 ## 1. Prerequisites
 If you're using Apache HTTP Server, **use v2.4.10 or later**!
@@ -12,3 +15,9 @@ From [Amazon's Docs](https://developer.amazon.com/de/docs/custom-skills/request-
 
 ## 2. Getting Started
 You can use this library with `DEBUG` mode on. The amazon server verification for timestamps however will be skipped. This will cause amazon to not accept your skill if you try to publish your skill in `DEBUG` mode.
+
+## 3. Settings
+This django app adds some settings to your project:
+
+   `ALEXA_VERIFY_CONN : bool` Default: `True`
+This setting specifies if every request to an alexa skill should be verified against the amazon servers. This is useful when testing your skill without Amazon's service.
