@@ -12,11 +12,14 @@ from urllib.request import urlopen
 import aniso8601
 from OpenSSL import crypto
 from django.conf import settings
+from django.http import HttpRequest
 
 from . import VerificationError
 
 
-def is_valid_request(url: str, signature: str, request) -> bool:
+def is_valid_request(request: HttpRequest) -> bool:
+    url = request.META.get("SignatureCertChainUrl")
+    signature = request.META.get("Signature")
     body = json.loads(request.body)
     if not _valid_certificate_url(url):
         return False
@@ -30,6 +33,12 @@ def is_valid_request(url: str, signature: str, request) -> bool:
         timestamp = _parse_timestamp(body.get('request', {}).get('timestamp'))
         if not verify_timestamp(timestamp):
             return False
+
+    # TODO: Check application id on request
+    # try:
+    #     application_id = body['session']['application']['applicationId']
+    # except KeyError:
+    #     application_id = body['context']['System']['application']['applicationId']
 
 
 def verify_signature(cert, signature, signed_data):
