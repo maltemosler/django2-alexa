@@ -3,7 +3,7 @@ Django app for easily creating Amazon Alexa Skills
 
 ## Table of Content
 1. [Prerequisites](#1-prerequisites)
-2. [Getting Started](#2-getting-strated)
+2. [Getting Started](#2-getting-started)
 
 ## 1. Prerequisites
 If you're using Apache HTTP Server, **use v2.4.10 or later**!
