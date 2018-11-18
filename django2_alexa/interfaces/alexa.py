@@ -59,39 +59,39 @@ class Skill:
 
     # Standard
     def launch(self, func):
-        self._launch = func
         wrapper = self._wrapper(func, LaunchRequest)
+        self._launch = wrapper
         return wrapper
 
     def intent(self, name: str):
         def inner(func):
-            self._intents[name] = func
             wrapper = self._wrapper(func, IntentRequest)
+            self._intents[name] = wrapper
             return wrapper
         return inner
 
     # AudioPlayer
     def playback_started(self, func):
-        self._playback_started = func
         wrapper = self._wrapper(func, PlaybackRequest)
+        self._playback_started = wrapper
         return wrapper
 
     def playback_finished(self, func):
-        self._playback_finished = func
         wrapper = self._wrapper(func, PlaybackRequest)
+        self._playback_finished = wrapper
         return wrapper
 
     def playback_stopped(self, func):
-        self._playback_stopped = func
         wrapper = self._wrapper(func, PlaybackRequest)
+        self._playback_stopped = wrapper
         return wrapper
 
     def playback_nearly_finished(self, func):
-        self._playback_nearly_finished = func
         wrapper = self._wrapper(func, PlaybackRequest)
+        self._playback_nearly_finished = wrapper
         return wrapper
 
     def playback_failed(self, func):
-        self._playback_nearly_finished = func
         wrapper = self._wrapper(func, PlaybackFailedRequest)
+        self._playback_nearly_finished = wrapper
         return wrapper
