@@ -1,7 +1,4 @@
 from enum import Enum
-from django2_alexa.interfaces.request.base import BaseRequest
-from django.http import HttpRequest
-from django2_alexa.utils.alexa.locales import Locale
 
 
 class ConfirmationStatus(Enum):
@@ -10,17 +7,12 @@ class ConfirmationStatus(Enum):
     DENIED = "DENIED"
 
 
-class Resolution:
-    def __init__(self):
-        self.resolutionsPerAuthority = []
-
-
 class Slot:
-    def __init__(self, name: str, value: str, confirmation_status: ConfirmationStatus, resolutions: str=None):
+    def __init__(self, name: str, value: str, confirmation_status: ConfirmationStatus):
         self.name = name
         self.value = value
         self.confirmation_status = ConfirmationStatus(confirmation_status)
-        self.resolutions = Resolution()
+        # TODO: Resolutions
 
     def to_dict(self):
         d = {
@@ -28,8 +20,6 @@ class Slot:
             'value': self.value,
             'confirmationStatus': self.confirmation_status,
         }
-        if self.resolutions:
-            d['resolutions'] = self.resolutions
         return d
 
 
@@ -46,4 +36,3 @@ class Intent:
             'slots': self.slots
         }
         return d
-
