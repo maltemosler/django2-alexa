@@ -26,6 +26,22 @@ INSTALLED_APPS = [
 	...
 ]
 ```
+In your current path create a django app with:
+```python
+python manage.py startapp YourAppName
+```
+
+In your django *urls.py* add the following:
+```python
+from YourAppName.views import skill
+
+urlpatterns = [
+	...
+    path('', skill.view)
+	...
+]
+```
+
 You can use this library with `DEBUG` mode on in *settings.py*. The amazon server verification for timestamps however will be skipped. This will cause amazon to not accept your skill if you try to publish your skill in `DEBUG` mode.
 
 ## 3. Settings
