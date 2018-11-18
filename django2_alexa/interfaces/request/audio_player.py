@@ -1,6 +1,6 @@
 from django.http import HttpRequest
 
-from django2_alexa.interfaces import BaseRequest
+from django2_alexa.interfaces.request.base import BaseRequest
 from django2_alexa.utils.enums import Locale
 
 
