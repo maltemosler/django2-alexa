@@ -11,7 +11,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setuptools.setup(
     name="django2-alexa",
-    version="0.1.0",
+    version="0.1.1",
     author="Tim Woocker & Malte Mosler",
     author_email="tim.woocker@googlemail.com",
     description="Django app for easily creating Amazon Alexa Skills",

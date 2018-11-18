@@ -1,13 +1,11 @@
 from django.conf import settings
 from django.http import HttpResponseServerError
-from django.views.decorators.csrf import csrf_exempt
 
 from django2_alexa.interfaces.request.alexa import LaunchRequest
 from django2_alexa.utils.s3_verification import is_valid_request
 
 
 def launch(func):
-    @csrf_exempt
     def wrapper(request, *args, **kwargs):
         if getattr(settings, "ALEXA_VERIFY_CONN", False) and not is_valid_request(request):
             # TODO: Troubleshooting part in docs
@@ -19,7 +17,6 @@ def launch(func):
 
 def intent(name: str):
     def inner(func):
-        @csrf_exempt
         def wrapper(request, *args, **kwargs):
             if getattr(settings, "ALEXA_VERIFY_CONN", False) and not is_valid_request(request):
                 return HttpResponseServerError("Amazon Server verification failed.")
