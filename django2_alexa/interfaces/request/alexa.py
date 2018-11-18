@@ -20,10 +20,14 @@ class IntentRequest(BaseRequest):
         self.request_id = self.body["requestId"]  # type: str
         self.timestamp = self.body["timestamp"]  # type: str
         self.locale = Locale(self.body["locale"])  # type: Locale
-        self.dialog_state = DialogState(self.body["dialogState"])
+        if "dialogState" in self.body:
+            self.dialog_state = DialogState(self.body["dialogState"])
+        else:
+            self.dialog_state = None
         intent = self.body["intent"]
         slots = {}
-        for name in intent["slots"]:
-            slots[name] = Slot(name, intent["slots"][name]["value"],
-                               ConfirmationStatus(intent["slots"][name]["confirmationStatus"]))
+        if "slots" in intent:
+            for name in intent["slots"]:
+                slots[name] = Slot(name, intent["slots"][name]["value"],
+                                   ConfirmationStatus(intent["slots"][name]["confirmationStatus"]))
         self.intent = Intent(intent["name"], ConfirmationStatus(intent["confirmationStatus"]), slots)

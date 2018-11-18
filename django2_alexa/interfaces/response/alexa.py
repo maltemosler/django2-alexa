@@ -9,12 +9,12 @@ from django2_alexa.utils import Directive
 
 class AlexaResponse(HttpResponse):
     def __init__(self, output_speech: OutputSpeech = None, card: Card = None, reprompt: OutputSpeech = None,
-                 should_end_session=True, directives: [Directive] = None, *args, **kwargs):
+                 end_session=True, directives: [Directive] = None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._output_speech = output_speech
         self._card = card
         self._reprompt = reprompt
-        self._should_session_end = should_end_session
+        self._should_session_end = end_session
         self.directives = directives
 
         self.refresh_content()
