@@ -16,31 +16,31 @@ def start_skill(request):
 
 
 @skill.intent("AMAZON.HelpIntent")
-def help_intent():
+def help_intent(request):
     help_txt = "This skill is playing music."
     return Response(OutputSpeech(help_txt), should_end_session=False)
 
 
 @skill.intent('AMAZON.PauseIntent')
-def pause():
+def pause(request):
     pass
 
 
 @skill.intent('AMAZON.ResumeIntent')
-def resume():
+def resume(request):
     pass
 
 
 @skill.intent("AMAZON.CancelIntent")
-def cancel_intent():
+def cancel_intent(request):
     return Response(OutputSpeech("You can't stop! Hahahaha"), should_end_session=True)
 
 
 @skill.intent("AMAZON.StopIntent")
-def stop_intent():
+def stop_intent(request):
     return Response(OutputSpeech("You can't stop! Hahahaha"), should_end_session=True)
 
 
 # @skill.session_ended
-# def session_end():
+# def session_end(request):
 #    return '{}', 200
