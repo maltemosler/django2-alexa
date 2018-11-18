@@ -1,1 +1,1 @@
-from .alexa import Response
+from .alexa import AlexaResponse
