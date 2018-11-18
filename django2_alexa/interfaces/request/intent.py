@@ -1,7 +1,7 @@
 from enum import Enum
 from django2_alexa.interfaces.request.base import BaseRequest
 from django.http import HttpRequest
-from django2_alexa.utils.alexa.locales import Locale
+from django2_alexa.utils.enums.locales import Locale
 
 
 class ConfirmationStatus(Enum):

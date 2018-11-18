@@ -1,6 +1,6 @@
 import uuid
 
-from django2_alexa.utils.alexa.play_behavior import PlayBehavior
+from django2_alexa.utils.enums.play_behavior import PlayBehavior
 
 
 class AudioMeta:
