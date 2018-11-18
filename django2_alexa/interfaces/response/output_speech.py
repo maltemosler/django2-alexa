@@ -1,15 +1,11 @@
 from enum import Enum
 
+from django2_alexa.utils.alexa.play_behavior import PlayBehavior
+
 
 class SpeechType(Enum):
     PLAIN_TEXT = "PlainText"
     SSML = "SSML"
-
-
-class PlayBehavior(Enum):
-    ENQUEUE = "ENQUEUE"
-    REPLACE_ALL = "REPLACE_ALL"
-    REPLACE_ENQUEUED = "REPLACE_ENQUEUED"
 
 
 class OutputSpeech:
