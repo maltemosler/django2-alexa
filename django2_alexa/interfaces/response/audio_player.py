@@ -37,11 +37,12 @@ class Play(Directive):
                 'stream': {
                     'url': self.url,
                     'token': self.token,
-                    'expectedPreviousToken': self.previous_token,
                     'offsetInMilliseconds': self.offset
                 }
             }
         }
+        if self.play_behavior == PlayBehavior.ENQUEUE:
+            d["audioItem"]["stream"]["expectedPreviousToken"] = self.previous_token
         if self.meta:
             d["audioItem"]["metadata"] = self.meta.to_dict()
         return d

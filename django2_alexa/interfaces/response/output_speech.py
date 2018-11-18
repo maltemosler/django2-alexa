@@ -9,7 +9,7 @@ class SpeechType(Enum):
 
 
 class OutputSpeech:
-    def __init__(self, content: str, sp_type=SpeechType.PLAIN_TEXT, behavior=PlayBehavior.ENQUEUE):
+    def __init__(self, content: str, sp_type=SpeechType.PLAIN_TEXT, behavior=PlayBehavior.REPLACE_ALL):
         self.type = sp_type
         self.content = content
         self.behavior = behavior
