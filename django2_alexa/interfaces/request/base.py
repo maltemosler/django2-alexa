@@ -5,5 +5,4 @@ from django.http import HttpRequest
 
 class BaseRequest:
     def __init__(self, request: HttpRequest):
-        self.body = json.loads(request.body.decode())   # type: dict
-        raise Exception(request.body.decode())
+        self.body = json.loads(request.body.decode())['request']   # type: dict
