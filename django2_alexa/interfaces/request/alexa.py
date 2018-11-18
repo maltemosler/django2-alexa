@@ -26,7 +26,8 @@ class IntentRequest(BaseRequest):
             self.dialog_state = None
         intent = self.body["intent"]
         slots = {}
-        for name in intent["slots"]:
-            slots[name] = Slot(name, intent["slots"][name]["value"],
-                               ConfirmationStatus(intent["slots"][name]["confirmationStatus"]))
+        if "slots" in intent:
+            for name in intent["slots"]:
+                slots[name] = Slot(name, intent["slots"][name]["value"],
+                                   ConfirmationStatus(intent["slots"][name]["confirmationStatus"]))
         self.intent = Intent(intent["name"], ConfirmationStatus(intent["confirmationStatus"]), slots)
