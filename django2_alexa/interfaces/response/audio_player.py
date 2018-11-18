@@ -46,3 +46,20 @@ class Play(Directive):
         if self.meta:
             d["audioItem"]["metadata"] = self.meta.to_dict()
         return d
+
+
+class Stop(Directive):
+    def to_dict(self):
+        return {'type': "AudioPlayer.Stop"}
+
+
+class ClearQueue(Directive):
+    def __init__(self, stop=False):
+        self.stop = stop
+
+    def to_dict(self):
+        d = {'type': "AudioPlayer.ClearQueue"}
+        if self.stop:
+            d["clearBehavior"] = "CLEAR_ALL"
+        else:
+            d["clearBehavior"] = "CLEAR_ENQUEUED"
