@@ -18,11 +18,13 @@ class OutputSpeech:
         self.content = content
         self.behavior = behavior
 
-    def serialize(self):
+    def to_dict(self):
         d = {
-            'type': self.type.value, 'playBehavior': self.behavior.value
+            'type': self.type.value,
+            'playBehavior': self.behavior.value
         }
         if self.type == SpeechType.PLAIN_TEXT:
             d['text'] = self.content
         else:
             d['ssml'] = self.content
+        return d
