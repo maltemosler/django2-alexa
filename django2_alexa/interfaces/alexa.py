@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.http import HttpResponseServerError
+from django.views.decorators.csrf import csrf_exempt
 
 from django2_alexa.interfaces.request.alexa import LaunchRequest
 from django2_alexa.interfaces.request.base import BaseRequest
@@ -10,7 +11,10 @@ class Skill:
     _launch = None
     _intents = {}
 
-    def view(self, request, *args, **kwargs):
+    def __init__(self):
+        self.view = csrf_exempt(self._view)
+
+    def _view(self, request, *args, **kwargs):
         re = BaseRequest(request)
         if re.type == "LaunchRequest" and self._launch:
             return self._launch(request, *args, **kwargs)
