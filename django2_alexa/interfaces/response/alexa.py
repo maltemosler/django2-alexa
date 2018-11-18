@@ -10,27 +10,64 @@ class Response(HttpResponse):
     def __init__(self, output_speech: OutputSpeech = None, card: Card = None, reprompt: OutputSpeech = None,
                  should_end_session=True, directives: [object] = None, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.output_speech = output_speech
-        self.card = card
-        self.reprompt = reprompt
-        self.should_session_end = should_end_session
+        self._output_speech = output_speech
+        self._card = card
+        self._reprompt = reprompt
+        self._should_session_end = should_end_session
         # TODO: directives
 
+        self.refresh_content()
         self["Content-Type"] = "application/json;charset=UTF-8"
 
-    def serialize(self):
+    def refresh_content(self):
         d = {
             'version': "1.0",
             # TODO: 'sessionAttributes': None,
             'response': {
-                'shouldEndSession': self.should_session_end,
+                'shouldEndSession': self._should_session_end,
                 # TODO: directives
             }
         }
-        if self.output_speech:
-            d['response']['outputSpeech'] = self.output_speech.to_dict()
-        if self.card:
-            d['response']['card'] = self.card.to_dict()
-        if self.reprompt:
-            d['response']['reprompt'] = self.reprompt.to_dict()
-        return self.serialize_headers() + b'\r\n\r\n' + json.dumps(d).encode()
+        if self._output_speech:
+            d['response']['outputSpeech'] = self._output_speech.to_dict()
+        if self._card:
+            d['response']['card'] = self._card.to_dict()
+        if self._reprompt:
+            d['response']['reprompt'] = self._reprompt.to_dict()
+        self.content = json.dumps(d).encode()
+
+    @property
+    def output_speech(self):
+        return self._output_speech
+
+    @output_speech.setter
+    def output_speech(self, value):
+        self._output_speech = value
+        self.refresh_content()
+
+    @property
+    def card(self):
+        return self._card
+
+    @card.setter
+    def card(self, value):
+        self._card = value
+        self.refresh_content()
+
+    @property
+    def reprompt(self):
+        return self._reprompt
+
+    @reprompt.setter
+    def reprompt(self, value):
+        self._reprompt = value
+        self.refresh_content()
+
+    @property
+    def should_session_end(self):
+        return self._should_session_end
+
+    @should_session_end.setter
+    def should_session_end(self, value):
+        self._should_session_end = value
+        self.refresh_content()
