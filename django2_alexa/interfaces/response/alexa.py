@@ -7,7 +7,7 @@ from django2_alexa.interfaces.response.cards import Card
 from django2_alexa.utils import Directive
 
 
-class Response(HttpResponse):
+class AlexaResponse(HttpResponse):
     def __init__(self, output_speech: OutputSpeech = None, card: Card = None, reprompt: OutputSpeech = None,
                  should_end_session=True, directives: [Directive] = None, *args, **kwargs):
         super().__init__(*args, **kwargs)
