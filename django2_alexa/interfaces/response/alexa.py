@@ -16,8 +16,6 @@ class Response(HttpResponse):
         self.should_session_end = should_end_session
         # TODO: directives
 
-        self["Content-Type"] = "application/json;charset=UTF-8"
-
     def serialize(self):
         d = {
             'version': "1.0",
