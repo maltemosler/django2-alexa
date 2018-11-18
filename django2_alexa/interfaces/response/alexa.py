@@ -33,4 +33,4 @@ class Response(HttpResponse):
             d['response']['card'] = self.card.to_dict()
         if self.reprompt:
             d['response']['reprompt'] = self.reprompt.to_dict()
-        return self.serialize_headers() + b'\r\n\r\n' + json.dumps(d)
+        return self.serialize_headers() + b'\r\n\r\n' + json.dumps(d).encode()
