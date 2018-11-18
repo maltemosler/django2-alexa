@@ -16,6 +16,7 @@ class AudioMeta:
             d['title'] = self.title
         if self.subtitle:
             d['subtitle'] = self.subtitle
+        return d
 
 
 class Play(Directive):
@@ -36,10 +37,12 @@ class Play(Directive):
                 'stream': {
                     'url': self.url,
                     'token': self.token,
-                    'expectedPreviousToken': self.previous_token,
                     'offsetInMilliseconds': self.offset
-                },
-                'metadata': self.meta.to_dict()
+                }
             }
         }
+        if self.play_behavior == PlayBehavior.ENQUEUE:
+            d["audioItem"]["stream"]["expectedPreviousToken"] = self.previous_token
+        if self.meta:
+            d["audioItem"]["metadata"] = self.meta.to_dict()
         return d
