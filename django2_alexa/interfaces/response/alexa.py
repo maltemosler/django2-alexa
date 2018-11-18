@@ -1,4 +1,5 @@
 import json
+from typing import Type
 
 from django.http import HttpResponse
 
@@ -8,7 +9,7 @@ from django2_alexa.utils import Directive
 
 
 class Response(HttpResponse):
-    def __init__(self, output_speech: OutputSpeech = None, card: Card = None, reprompt: OutputSpeech = None,
+    def __init__(self, output_speech: OutputSpeech = None, card: Type[Card] = None, reprompt: OutputSpeech = None,
                  should_end_session=True, directives: [Directive] = None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._output_speech = output_speech
