@@ -26,9 +26,15 @@ INSTALLED_APPS = [
 	...
 ]
 ```
+In your current path create a django app with:
+```python
+python manage.py startapp YourAppName
+```
 
 In your django *urls.py* add the following:
 ```python
+from YourAppName.views import skill
+
 urlpatterns = [
 	...
     path('', skill.view)
