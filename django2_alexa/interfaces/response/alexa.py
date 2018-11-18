@@ -23,11 +23,14 @@ class Response(HttpResponse):
             'version': "1.0",
             # TODO: 'sessionAttributes': None,
             'response': {
-                'outputSpeech': self.output_speech.to_dict(),
-                'card': self.card.to_dict(),
-                'reprompt': self.reprompt.to_dict(),
                 'shouldEndSession': self.should_session_end,
                 # TODO: directives
             }
         }
+        if self.output_speech:
+            d['response']['outputSpeech'] = self.output_speech.to_dict()
+        if self.card:
+            d['response']['card'] = self.card.to_dict()
+        if self.reprompt:
+            d['response']['reprompt'] = self.reprompt.to_dict()
         return self.serialize_headers() + b'\r\n\r\n' + json.dumps(d)
