@@ -14,25 +14,9 @@ class Slot:
         self.confirmation_status = ConfirmationStatus(confirmation_status)
         # TODO: Resolutions
 
-    def to_dict(self):
-        d = {
-            'name': self.name,
-            'value': self.value,
-            'confirmationStatus': self.confirmation_status,
-        }
-        return d
-
 
 class Intent:
-    def __init__(self, name: str, confirmation_status: ConfirmationStatus, slot: Slot):
+    def __init__(self, name: str, confirmation_status: ConfirmationStatus, slots={}):
         self.name = name
         self.confirmation_status = confirmation_status
-        self.slots = slot
-
-    def to_dict(self):
-        d = {
-            'name': self.name,
-            'confirmationStatus': self.confirmation_status,
-            'slots': self.slots
-        }
-        return d
+        self.slots = slots
