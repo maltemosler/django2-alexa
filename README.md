@@ -14,16 +14,19 @@ From [Amazon's Docs](https://developer.amazon.com/de/docs/custom-skills/request-
 > Note: if you are using Apache HTTP Server to host your web service, use version 2.4.10 or later. Earlier versions of Apache HTTP Server send an "unrecognized name" warning if the server is not configured with a ServerName or ServerAlias in the configuration files. This prevents the Alexa service from sending the customer's request to your server. To address this, either upgrade to 2.4.10 or later, or add ServerName / ServerAlias to your server's configuration file.
 
 ## 2. Getting Started
-You can use this library with `DEBUG` mode on. The amazon server verification for timestamps however will be skipped. This will cause amazon to not accept your skill if you try to publish your skill in `DEBUG` mode.
+You can use pip to install this app:
 
-    pip install django2-alexa
-In your django settings.py add the following:
+	pip install django2-alexa
+
+In your django *settings.py* add `"django2_alexa"` to `INSTALLED_APPS`:
 ```python
 INSTALLED_APPS = [
+	...
     'django2_alexa',
 	...
 ]
 ```
+You can use this library with `DEBUG` mode on in *settings.py*. The amazon server verification for timestamps however will be skipped. This will cause amazon to not accept your skill if you try to publish your skill in `DEBUG` mode.
 
 ## 3. Settings
 This django app adds some settings to your project:
