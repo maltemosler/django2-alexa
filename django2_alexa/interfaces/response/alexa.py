@@ -16,6 +16,8 @@ class Response(HttpResponse):
         self.should_session_end = should_end_session
         # TODO: directives
 
+        self["Content-Type"] = "application/json;charset=UTF-8"
+
     def serialize(self):
         d = {
             'version': "1.0",
@@ -31,4 +33,5 @@ class Response(HttpResponse):
             d['response']['card'] = self.card.to_dict()
         if self.reprompt:
             d['response']['reprompt'] = self.reprompt.to_dict()
-        return self.serialize_headers() + b'\r\n\r\n' + json.dumps(d).encode()
+        # return self.serialize_headers() + b'\r\n\r\n' + json.dumps(d).encode()
+        return json.dumps(d).encode()
