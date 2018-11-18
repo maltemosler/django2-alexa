@@ -16,6 +16,7 @@ class AudioMeta:
             d['title'] = self.title
         if self.subtitle:
             d['subtitle'] = self.subtitle
+        return d
 
 
 class Play(Directive):
@@ -38,8 +39,9 @@ class Play(Directive):
                     'token': self.token,
                     'expectedPreviousToken': self.previous_token,
                     'offsetInMilliseconds': self.offset
-                },
-                'metadata': self.meta.to_dict()
+                }
             }
         }
+        if self.meta:
+            d["audioItem"]["metadata"] = self.meta.to_dict()
         return d
