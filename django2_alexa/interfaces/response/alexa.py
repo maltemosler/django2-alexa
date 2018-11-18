@@ -3,7 +3,7 @@ import json
 from django.http import HttpResponse
 
 from django2_alexa.interfaces.response.output_speech import OutputSpeech
-from django2_alexa.utils.alexa.cards import Card
+from django2_alexa.interfaces.response.cards import Card
 
 
 class Response(HttpResponse):
