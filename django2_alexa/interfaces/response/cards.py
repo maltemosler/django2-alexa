@@ -37,7 +37,7 @@ class StandardCard(Card):
             if self.small_image_url:
                 d['image']['smallImageUrl'] = self.small_image_url
             if self.large_item_url:
-                d['image']['large_item_url'] = self.large_item_url
+                d['image']['largeImageUrl'] = self.large_item_url
 
         return d
 
