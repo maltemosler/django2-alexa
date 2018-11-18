@@ -1,8 +1,5 @@
-from django.http import HttpRequest
-
-
 class Card:
-    def serialize(self):
+    def to_dict(self):
         pass
 
 

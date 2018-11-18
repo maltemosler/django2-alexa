@@ -1,3 +1,5 @@
+import json
+
 from django.http import HttpResponse
 
 from django2_alexa.interfaces.response.output_speech import OutputSpeech
@@ -18,6 +20,14 @@ class Response(HttpResponse):
 
     def serialize(self):
         d = {
-            'version': "1.0"
+            'version': "1.0",
+            # TODO: 'sessionAttributes': None,
+            'response': {
+                'outputSpeech': self.output_speech.to_dict(),
+                'card': self.card.to_dict(),
+                'reprompt': self.reprompt.to_dict(),
+                'shouldEndSession': self.should_session_end,
+                # TODO: directives
+            }
         }
-        return self.serialize_headers() + b'\r\n\r\n' + self.content
+        return self.serialize_headers() + b'\r\n\r\n' + json.dumps(d)
