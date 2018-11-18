@@ -12,7 +12,7 @@ class SimpleCard(Card):
         self.title = title
         self.content = content
 
-    def serialize(self):
+    def to_dict(self):
         d = {
             'type': self.type,
             'title': self.title,
@@ -29,7 +29,7 @@ class StandardCard(Card):
         self.small_image_url = small_image_url
         self.large_item_url = large_item_url
 
-    def serialize(self):
+    def to_dict(self):
         d = {
             'type': self.type,
             'title': self.title,
@@ -49,7 +49,7 @@ class LinkAccountCard(Card):
     def __init__(self):
         self.type = "LinkAccount"
 
-    def serialize(self):
+    def to_dict(self):
         d = {
             'type': self.type
         }
@@ -63,7 +63,7 @@ class AskForPermissionsConsentCard(Card):
         self.content = content
         self.text = text
 
-    def serialize(self):
+    def to_dict(self):
         d = {
             'type': self.type,
             'title': self.title,
