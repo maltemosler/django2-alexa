@@ -1,5 +1,6 @@
 import uuid
 
+from django2_alexa.utils import Directive
 from django2_alexa.utils.enums.play_behavior import PlayBehavior
 
 
@@ -17,7 +18,7 @@ class AudioMeta:
             d['subtitle'] = self.subtitle
 
 
-class Play:
+class Play(Directive):
     def __init__(self, url: str, play_behavior=PlayBehavior.REPLACE_ALL, offset=0, previous_token: str = None,
                  meta: AudioMeta = None):
         self.play_behavior = play_behavior

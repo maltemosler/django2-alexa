@@ -25,8 +25,7 @@ class Response(HttpResponse):
             'version': "1.0",
             # TODO: 'sessionAttributes': None,
             'response': {
-                'shouldEndSession': self._should_session_end,
-                # TODO: directives
+                'shouldEndSession': self._should_session_end
             }
         }
         if self._output_speech:
@@ -35,6 +34,8 @@ class Response(HttpResponse):
             d['response']['card'] = self._card.to_dict()
         if self._reprompt:
             d['response']['reprompt'] = self._reprompt.to_dict()
+        for d in self.directives:
+            pass
         self.content = json.dumps(d).encode()
 
     @property
