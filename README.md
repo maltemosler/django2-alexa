@@ -16,6 +16,15 @@ From [Amazon's Docs](https://developer.amazon.com/de/docs/custom-skills/request-
 ## 2. Getting Started
 You can use this library with `DEBUG` mode on. The amazon server verification for timestamps however will be skipped. This will cause amazon to not accept your skill if you try to publish your skill in `DEBUG` mode.
 
+    pip install django2-alexa
+In your django settings.py add the following:
+```python
+INSTALLED_APPS = [
+    'django2_alexa',
+	...
+]
+```
+
 ## 3. Settings
 This django app adds some settings to your project:
 
