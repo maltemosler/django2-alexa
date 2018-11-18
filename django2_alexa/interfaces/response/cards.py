@@ -4,7 +4,7 @@ class Card:
 
 
 class SimpleCard(Card):
-    def __init__(self, title: str=None, content: str=None):
+    def __init__(self, title: str = None, content: str = None):
         self.type = "Simple"
         self.title = title
         self.content = content
@@ -19,7 +19,7 @@ class SimpleCard(Card):
 
 
 class StandardCard(Card):
-    def __init__(self, title: str=None, text: str=None, small_image_url: str=None, large_item_url: str=None):
+    def __init__(self, title: str = None, text: str = None, small_image_url: str = None, large_item_url: str = None):
         self.type = "Standard"
         self.title = title
         self.text = text
@@ -54,7 +54,7 @@ class LinkAccountCard(Card):
 
 
 class AskForPermissionsConsentCard(Card):
-    def __init__(self, title: str=None, content: str=None, text: str=None):
+    def __init__(self, title: str = None, content: str = None, text: str = None):
         self.type = "AskForPermissionsConsent"
         self.title = title
         self.content = content
