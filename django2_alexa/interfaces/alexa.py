@@ -53,8 +53,8 @@ class Skill:
         def wrapper(request, *args, **kwargs):
             if getattr(settings, "ALEXA_VERIFY_CONN", False) and not is_valid_request(request):
                 return HttpResponseServerError("Amazon Server verification failed.")
-            request.alexa_request = req(request)
-            return func(request, *args, **kwargs)
+            alexa_request = req(request)
+            return func(alexa_request, *args, **kwargs)
         return wrapper
 
     # Standard
