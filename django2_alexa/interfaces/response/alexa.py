@@ -4,17 +4,18 @@ from django.http import HttpResponse
 
 from django2_alexa.interfaces.response.output_speech import OutputSpeech
 from django2_alexa.interfaces.response.cards import Card
+from django2_alexa.utils import Directive
 
 
 class Response(HttpResponse):
     def __init__(self, output_speech: OutputSpeech = None, card: Card = None, reprompt: OutputSpeech = None,
-                 should_end_session=True, directives: [object] = None, *args, **kwargs):
+                 should_end_session=True, directives: [Directive] = None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._output_speech = output_speech
         self._card = card
         self._reprompt = reprompt
         self._should_session_end = should_end_session
-        # TODO: directives
+        self.directives = directives
 
         self.refresh_content()
         self["Content-Type"] = "application/json;charset=UTF-8"
