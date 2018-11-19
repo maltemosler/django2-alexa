@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-from django2_alexa.interfaces.response import audio_player
-from django2_alexa.interfaces.response.output_speech import OutputSpeech
-from django2_alexa.interfaces.alexa import Skill
+
 from django2_alexa.interfaces.response.alexa import AlexaResponse
+from django2_alexa.interfaces.alexa import Skill
+from django2_alexa.interfaces.response.output_speech import OutputSpeech
+from django2_alexa.interfaces.response import audio_player
 from random import randint
 
 
