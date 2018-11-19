@@ -63,8 +63,10 @@ This django app adds some settings to your project:
 
 ## 4. Examples
 [Audio Response](https://github.com/timwoocker/django2-alexa/blob/master/examples/audio/views.py)
+
 [Card Response](https://github.com/timwoocker/django2-alexa/blob/master/examples/card/views.py)
+
 [Slots](https://github.com/timwoocker/django2-alexa/blob/master/examples/slots/views.py)
 ## 5. Support
 
-Twitter: [@Tim Woocker](https://twitter.com/crey4fun) [@DeemonRider](https://twitter.com/crey4fun)
+Twitter: [@Tim Woocker](https://twitter.com/crey4fun) [@DeemonRider](https://twitter.com/DeemonRider)
