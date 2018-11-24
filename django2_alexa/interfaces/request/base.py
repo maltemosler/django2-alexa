@@ -9,3 +9,4 @@ class BaseRequest:
         self.body = data['request']   # type: dict
         self.type = self.body['type']
         self.user_id = data["context"]["System"]["user"]["userId"]
+        self.audio_player = data['context']["AudioPlayer"]
