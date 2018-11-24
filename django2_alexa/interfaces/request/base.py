@@ -5,8 +5,8 @@ from django.http import HttpRequest
 
 class BaseRequest:
     def __init__(self, request: HttpRequest):
-        data = json.loads(request.body.decode())
-        self.body = data['request']   # type: dict
+        self._data = json.loads(request.body.decode())
+        self.body = self._data['request']   # type: dict
         self.type = self.body['type']
-        self.user_id = data["context"]["System"]["user"]["userId"]
-        self.audio_player = data['context']["AudioPlayer"]
+        self.user_id = self._data["context"]["System"]["user"]["userId"]
+        self.audio_player = self._data["context"]["AudioPlayer"]

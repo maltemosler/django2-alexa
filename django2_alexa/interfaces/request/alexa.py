@@ -12,6 +12,7 @@ class LaunchRequest(BaseRequest):
         self.request_id = self.body["requestId"]  # type: str
         self.timestamp = self.body["timestamp"]  # type: str
         self.locale = Locale(self.body["locale"])  # type: Locale
+        self.session_id = self._data["session"]["sessionId"]
 
 
 class IntentRequest(BaseRequest):
@@ -20,6 +21,7 @@ class IntentRequest(BaseRequest):
         self.request_id = self.body["requestId"]  # type: str
         self.timestamp = self.body["timestamp"]  # type: str
         self.locale = Locale(self.body["locale"])  # type: Locale
+        self.session_id = self._data["session"]["sessionId"]
         if "dialogState" in self.body:
             self.dialog_state = DialogState(self.body["dialogState"])
         else:
