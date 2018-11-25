@@ -2,7 +2,7 @@ from django.conf import settings
 from django.http import HttpResponseServerError
 from django.views.decorators.csrf import csrf_exempt
 
-from django2_alexa.interfaces.request.alexa import LaunchRequest, IntentRequest
+from django2_alexa.interfaces.request.alexa import StandardRequest, IntentRequest, SessionEndedRequest
 from django2_alexa.interfaces.request.audio_player import PlaybackRequest, PlaybackFailedRequest
 from django2_alexa.interfaces.request.base import BaseRequest
 from django2_alexa.utils.s3_verification import is_valid_request
@@ -12,6 +12,7 @@ class Skill:
     # Standard
     _launch = None
     _intents = {}
+    _session_ended = None
 
     # AudioPlayer
     _playback_started = None
@@ -33,6 +34,8 @@ class Skill:
             name = re.body['intent']['name']
             if name in self._intents:
                 return self._intents[name](request, *args, **kwargs)
+        if re.type == "SessionEndedRequest":
+            return self._session_ended(request, *args, **kwargs)
 
         # AudioPlayer Requests
         if re.type == "AudioPlayer.PlaybackStarted" and self._playback_started:
@@ -59,8 +62,8 @@ class Skill:
 
     # Standard
     def launch(self, func):
-        wrapper = self._wrapper(func, LaunchRequest)
-        self._launch = wrapper
+        wrapper = self._wrapper(func, StandardRequest)
+        self._session_ended = wrapper
         return wrapper
 
     def intent(self, name: str):
@@ -69,6 +72,11 @@ class Skill:
             self._intents[name] = wrapper
             return wrapper
         return inner
+
+    def session_ended(self, func):
+        wrapper = self._wrapper(func, SessionEndedRequest)
+        self._launch = wrapper
+        return wrapper
 
     # AudioPlayer
     def playback_started(self, func):

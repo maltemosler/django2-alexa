@@ -6,7 +6,7 @@ from django2_alexa.utils.enums import DialogState
 from django2_alexa.utils.enums.locales import Locale
 
 
-class LaunchRequest(BaseRequest):
+class StandardRequest(BaseRequest):
     def __init__(self, request: HttpRequest):
         super().__init__(request)
         self.request_id = self.body["requestId"]  # type: str
@@ -15,13 +15,9 @@ class LaunchRequest(BaseRequest):
         self.session_id = self._data["session"]["sessionId"]
 
 
-class IntentRequest(BaseRequest):
+class IntentRequest(StandardRequest):
     def __init__(self, request: HttpRequest):
         super().__init__(request)
-        self.request_id = self.body["requestId"]  # type: str
-        self.timestamp = self.body["timestamp"]  # type: str
-        self.locale = Locale(self.body["locale"])  # type: Locale
-        self.session_id = self._data["session"]["sessionId"]
         if "dialogState" in self.body:
             self.dialog_state = DialogState(self.body["dialogState"])
         else:
@@ -33,3 +29,10 @@ class IntentRequest(BaseRequest):
                 slots[name] = Slot(name, intent["slots"][name]["value"],
                                    ConfirmationStatus(intent["slots"][name]["confirmationStatus"]))
         self.intent = Intent(intent["name"], ConfirmationStatus(intent["confirmationStatus"]), slots)
+
+
+class SessionEndedRequest(StandardRequest):
+    def __init__(self, request: HttpRequest):
+        super().__init__(request)
+        self.reason = self.body["reason"]
+        self.error = self.body["error"]
