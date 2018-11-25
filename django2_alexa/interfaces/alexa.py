@@ -63,7 +63,7 @@ class Skill:
     # Standard
     def launch(self, func):
         wrapper = self._wrapper(func, StandardRequest)
-        self._session_ended = wrapper
+        self._launch = wrapper
         return wrapper
 
     def intent(self, name: str):
@@ -79,7 +79,7 @@ class Skill:
         def inner(request, *args, **kwargs):
             wrapper(request, *args, **kwargs)
             return HttpResponse()
-        self._launch = inner
+        self._session_ended = inner
         return wrapper
 
     # AudioPlayer
