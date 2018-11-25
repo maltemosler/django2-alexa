@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.http import HttpResponseServerError
+from django.http import HttpResponseServerError, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from django2_alexa.interfaces.request.alexa import StandardRequest, IntentRequest, SessionEndedRequest
@@ -75,7 +75,11 @@ class Skill:
 
     def session_ended(self, func):
         wrapper = self._wrapper(func, SessionEndedRequest)
-        self._launch = wrapper
+
+        def inner(request, *args, **kwargs):
+            wrapper(request, *args, **kwargs)
+            return HttpResponse()
+        self._launch = inner
         return wrapper
 
     # AudioPlayer
