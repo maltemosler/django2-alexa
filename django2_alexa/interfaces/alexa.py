@@ -5,7 +5,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django2_alexa.interfaces.request.alexa import StandardRequest, IntentRequest, SessionEndedRequest
 from django2_alexa.interfaces.request.audio_player import PlaybackRequest, PlaybackFailedRequest
 from django2_alexa.interfaces.request.base import BaseRequest
-from django2_alexa.interfaces.request.wake_on_lan import WakeUpRequest
 from django2_alexa.utils.s3_verification import is_valid_request
 
 
@@ -49,10 +48,6 @@ class Skill:
             return self._playback_nearly_finished(request, *args, **kwargs)
         if re.type == "AudioPlayer.PlaybackFailed" and self._playback_started:
             return self._playback_failed(request, *args, **kwargs)
-
-        # TODO: WakeOnLan Requests
-        if re.type == "AudioPlayer.WakeOnLANController" and self._wake_up:
-            return self._wake_up(request, *args, **kwargs)
 
         return HttpResponseServerError("Request not implemented.")
 
@@ -111,10 +106,4 @@ class Skill:
     def playback_failed(self, func):
         wrapper = self._wrapper(func, PlaybackFailedRequest)
         self._playback_nearly_finished = wrapper
-        return wrapper
-
-    # WakeOnLan
-    def wake_on_lan(self, func):
-        wrapper = self._wrapper(func, WakeUpRequest)
-        self._wake_up = wrapper
         return wrapper

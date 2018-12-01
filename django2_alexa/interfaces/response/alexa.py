@@ -9,7 +9,7 @@ from django2_alexa.utils import Directive
 
 class AlexaResponse(HttpResponse):
     def __init__(self, output_speech: OutputSpeech = None, card: Card = None, reprompt: OutputSpeech = None,
-                 end_session=True, directives: [Directive] = None, *args, **kwargs):
+                 end_session=True, directives: [Directive] = (), *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._output_speech = output_speech
         self._card = card
@@ -35,9 +35,8 @@ class AlexaResponse(HttpResponse):
             d['response']['card'] = self._card.to_dict()
         if self._reprompt:
             d['response']['reprompt'] = self._reprompt.to_dict()
-        if self.directives:
-            for directive in self.directives:
-                d['response']['directives'].append(directive.to_dict())
+        for directive in self.directives:
+            d['response']['directives'].append(directive.to_dict())
         self.content = json.dumps(d).encode()
 
     @property
