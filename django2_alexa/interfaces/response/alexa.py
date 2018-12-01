@@ -35,8 +35,9 @@ class AlexaResponse(HttpResponse):
             d['response']['card'] = self._card.to_dict()
         if self._reprompt:
             d['response']['reprompt'] = self._reprompt.to_dict()
-        for directive in self.directives:
-            d['response']['directives'].append(directive.to_dict())
+        if self.directives:
+            for directive in self.directives:
+                d['response']['directives'].append(directive.to_dict())
         self.content = json.dumps(d).encode()
 
     @property

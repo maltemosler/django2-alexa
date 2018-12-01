@@ -9,4 +9,4 @@ class BaseRequest:
         self.body = self._data['request']   # type: dict
         self.type = self.body['type']
         self.user_id = self._data["context"]["System"]["user"]["userId"]
-        #self.audio_player = self._data["context"]["AudioPlayer"]
+        #self.audio_player = self._data["context"]["AudioPlayer"] # todo: audio player not avaiable in every request
